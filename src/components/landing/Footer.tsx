@@ -1,14 +1,39 @@
+import { Link } from "@tanstack/react-router";
+
 export function Footer() {
-  const cols = [
-    { title: "Product", links: ["Features", "Pricing", "Enterprise", "Changelog"] },
-    { title: "Resources", links: ["Docs", "How to prompt", "Community", "Blog"] },
-    { title: "Company", links: ["About", "Careers", "Contact", "Brand"] },
-    { title: "Legal", links: ["Privacy", "Terms", "Security", "DPA"] },
+  const cols: Array<{ title: string; links: Array<{ label: string; to: any }> }> = [
+    {
+      title: "Product",
+      links: [
+        { label: "Features", to: "/" },
+        { label: "Pricing", to: "/pricing" },
+        { label: "Enterprise", to: "/enterprise" },
+        { label: "Changelog", to: "/blog" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { label: "Docs", to: "/help" },
+        { label: "Community", to: "/community" },
+        { label: "Blog", to: "/blog" },
+        { label: "Help Center", to: "/help" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About", to: "/enterprise" },
+        { label: "Contact", to: "/enterprise" },
+        { label: "Login", to: "/login" },
+        { label: "Sign up", to: "/signup" },
+      ],
+    },
   ];
   return (
     <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-10 md:grid-cols-5">
+        <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
             <div className="flex items-center gap-1.5">
               <span className="text-xl font-semibold tracking-tight text-foreground">LEAP</span>
@@ -28,10 +53,10 @@ export function Footer() {
               <h4 className="text-sm font-semibold text-foreground">{c.title}</h4>
               <ul className="mt-4 space-y-2.5">
                 {c.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
-                      {l}
-                    </a>
+                  <li key={l.label}>
+                    <Link to={l.to} className="text-sm text-muted-foreground hover:text-foreground">
+                      {l.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
