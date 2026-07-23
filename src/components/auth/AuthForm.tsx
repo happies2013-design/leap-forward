@@ -39,7 +39,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   async function handleGoogle() {
     try {
       const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: `${window.location.origin}/dashboard`,
+        redirect_uri: window.location.origin,
       });
       if (result.error) {
         toast.error("Google sign-in failed");
@@ -50,6 +50,18 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
     } catch {
       toast.error("Google sign-in failed");
     }
+  }
+
+  async function handleForgot() {
+    if (!email) {
+      toast.error("Enter your email above first");
+      return;
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    if (error) toast.error(error.message);
+    else toast.success("Password reset email sent");
   }
 
   const isSignup = mode === "signup";
