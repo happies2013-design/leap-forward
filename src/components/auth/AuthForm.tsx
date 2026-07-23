@@ -136,6 +136,15 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
                 {loading ? "…" : isSignup ? "Create account" : "Log in"}
               </button>
             </form>
+            {!isSignup && (
+              <button
+                type="button"
+                onClick={handleForgot}
+                className="mt-4 w-full text-center text-xs text-muted-foreground hover:text-foreground"
+              >
+                Forgot password?
+              </button>
+            )}
           </div>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
